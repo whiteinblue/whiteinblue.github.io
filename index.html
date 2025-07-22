@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+          content=".">
+    <meta name="keywords"
+          content="EarthCrafter">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EarthCrafter</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./static/css/twentytwenty.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./img/logo.png">
+
+
+    <script src="./static/js/jquery-3.2.1.min.js"></script>
+    <script src="./static/js/jquery.event.move.js"></script>
+    <script src="./static/js/jquery.twentytwenty.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/fontawesome.all.min.js"></script>
+</head>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LKCDBW8851"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-LKCDBW8851');
+</script>
+
+
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">EarthCrafter: Scalable 3D Earth Generation via Dual-Sparse Latent Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=zh-CN&user=HV2ZVVoAAAAJ">Shang Liu</a><sup>1,2</sup>*,
+            </span>
+            <span class="author-block">
+              <a href="https://ewrfcas.github.io/">Chenjie Cao</a><sup>1,2,3</sup>*,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=b1Q-k20AAAAJ">Chaohui Yu</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=rD_U0fMAAAAJ">Wen Qian</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=b1Q-k20AAAAJ">Jing Wang</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=WCRGTHsAAAAJ">Fan Wang</a><sup>1</sup>,
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Alibaba DAMO Academy, <sup>2</sup>Hupan Lab</span>, <sup>3</sup>Fudan University
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2411.16157"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://github.com/whiteinblue/EarthCrafter"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code and Model</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+    $(window).on('load', function () {
+        bulmaCarousel.attach('#results-carousel-horizontal', {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            loop: true,
+            autoplay: false,
+        });
+
+        bulmaCarousel.attach('#results-carousel-vertical', {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            loop: true,
+            autoplay: false,
+        });
+
+    });
+</script>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="columns is-vcentered interpolation-panel">
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_sem/overall_semantic-cond_g470_5_h7_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_sem/overall_semantic-cond_g507_2_h9_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_sem/overall_semantic-cond_g200_7_h5_video.mp4" type="video/mp4">
+          </video>
+        </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- <br><br><br> -->
+
+<section class="hero abstract">
+    <div class="hero-body">
+        <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-fifths" style=" margin-top: 10px; margin-bottom: 10px;">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+
+                        Despite the remarkable developments achieved by recent 3D generation works, scaling these methods to geographic extents, such as modeling thousands of square kilometers of Earth’s surface, remains an open challenge.
+We address this through a dual innovation in data infrastructure and model architecture. First, we introduce Aerial-Earth3D, the largest 3D aerial dataset to date, consisting of 50k curated scenes (each measuring 600m$\times$600m) captured across the U.S. mainland, comprising 45M multi-view Google Earth frames. Each scene provides pose-annotated multi-view images, depth maps, normals, semantic segmentation, and camera poses, with explicit quality control to ensure terrain diversity. Building on this foundation, we propose EarthCrafter, a tailored framework for large-scale 3D Earth generation via sparse-decoupled latent diffusion. Our architecture separates structural and textural generation: 1) Dual sparse 3D-VAEs compress high-resolution geometric voxels and textural 2D Gaussian Splats (2DGS) into compact latent spaces, largely alleviating the costly computation suffering from vast geographic scales while preserving critical information. 2) We propose condition-aware flow matching models trained on mixed inputs (semantics, images, or neither) to flexibly model latent geometry and texture features independently.
+Extensive experiments demonstrate that EarthCrafter performs substantially better in extremely large-scale generation. The framework further supports versatile applications, from semantic-guided urban layout generation to unconditional terrain synthesis, while maintaining geographic plausibility through our rich data priors from Aerial-Earth3D.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="hero teaser">
+    <div class="hero-body">
+        <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-fifths" style=" margin-top: 30px; margin-bottom: 20px;">
+                    <h2 class="title is-3">Aerial-Earth3D Dataset</h2>
+                    <div class="content has-text-justified">                       
+                        we present Aerial-Earth3D, the largest 3D aerial dataset created to date. This dataset comprises 50,028 meticulously curated scenes, each spanning 600m x 600m, sourced across the mainland U.S. with 45 million multi-view frames captured from Google Earth. To effectively cover valid and diverse regions with limited viewpoints, we carefully design heuristic camera poses based on simulated 3D scenes built upon DEM, OSM, and MS-Building datasets. Since Google Earth does not provide source meshes, we reconstruct 3D meshes via InstantNGP, applying several post-processing techniques to extract surface planes, fix normals, and refine mesh connectivity. Then these meshes are voxelized as the ground truth for structural generation. Additionally, we employ AIE-SEG to create semantic maps as mesh attributes, comprising 25 distinct classes. Aerial-Earth3D stands out as a large-scale 3D aerial dataset characterized by its diverse terrains and 3D annotations, significantly advancing both 3D generation and reconstruction efforts. 
+                        <div class="hero-body" style="margin-top: 40px; margin-bottom: -30px;">
+                            <img id="method" width="90%" src="./img/figure_simulated_space2.png"/>
+                        </div>
+                        <center><b>Data collection of Google Earth.</b></center>
+                        <div class="hero-body" style="margin-top: 40px; margin-bottom: -30px;">
+                            <img id="method" width="90%" src="./img/data_pipeline.png"/>
+                        </div>
+                        <center><b>The overall data pipeline of Aerial-Earth3D.</b></center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hero teaser is-light is-small">
+    <div class="hero-body">
+        <div class="container" style="text-align: center; ">
+            <h2 class="title is-3">Attributes visualization of Aerial-Earth3D Dataset</h2>
+
+            <div id="results-carousel-horizontal" class="carousel results-carousel">
+
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls>
+                    <source src="./video//data_visual/landmark_l1_0001_idx542_-73.88514680221557_40.86166556368545_-73.8792161663065_40.86616798820968_scene_r0.mp4" type="video/mp4">
+                </video>
+
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls>
+                    <source src="./video//data_visual/landmark_l1_0001_idx127_-74.11377942258973_40.68762824413679_-74.10786424368868_40.692130804893154_scene_r0.mp4" type="video/mp4">
+                </video>
+
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls>
+                    <source src="./video//data_visual/landmark_l1_0001_idx331_-74.08832555435566_40.761864045138594_-74.08240379882956_40.76636654779986_scene_r3.mp4" type="video/mp4">
+                </video>
+
+                <video muted autoplay="autoplay" loop="loop" width="100%" preload controls>
+                    <source src="./video//data_visual/landmark_l1_0001_idx406_-73.9564429005176_40.796466695851294_-73.95051807109105_40.80096917142579_scene_r0.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="content has-text-justified" style="margin-top: 15px;">
+                <b>Aerial-Earth3D Dataset</b> visualization
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="hero teaser">
+    <div class="hero-body">
+        <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-three-fifths" style=" margin-top: 30px; margin-bottom: 20px;">
+                    <h2 class="title is-3">Framework</h2>
+                    <div class="content has-text-justified">                       
+                        EarthCrafter separately models texture and structure in the latent space compressed by TexVAE and StructVAE as illustrated in (a) and (b), respectively. EarthCrafter also contains textural and structural flow-matching models, i.e., TexFM and StructFM, to model related latent presentations. We show the overall pipeline of EarthCrafter in (c), while dashed boxes denote optional conditions.
+                        <div class="hero-body" style="margin-top: 40px; margin-bottom: -30px;">
+                            <img id="method" width="90%" src="./img/method_overall_pipeline.png"/>
+                        </div>
+                        <center><b>Overall pipeline of EarthCrafter </b></center>
+                        <div class="hero-body" style="margin-top: 40px; margin-bottom: -30px;">
+                            <img id="method" width="90%" src="./img/method_struct_vae_fm.png"/>
+                        </div>
+                        <center><b>Network structure of StructVAE. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Network structure of TextFM.</b></center>
+                        <div class="hero-body" style="margin-top: 40px; margin-bottom: -30px;">
+                            <img id="method" width="90%" src="./img/method_texture_fm.png"/>
+                        </div>
+                        <center><b>Network structure of TextureFM.</b></center>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero teaser is-light is-small">
+    <div class="hero-body">
+
+        <div class="container" style="text-align: center; ">
+            <h2 class="title is-3">Infinite Scene generation under seamntic condition</h2>
+            <div id="comparison-depthpro" class="carousel results-carousel">
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark_l2_0001_idx619_-121.94773570658904_37.400990581058934_-121.94208850419055_37.405495685623606_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark_l2_0001_idx619_-121.94773570658904_37.400990581058934_-121.94208850419055_37.405495685623606_h0_video.jpg" width="100%"/>
+                </div>
+
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark_l5_lon-79_lat37_0001_idx8017_-77.60424555011198_37.51232032716621_-77.59858996973927_37.51682534664768_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark_l5_lon-79_lat37_0001_idx8017_-77.60424555011198_37.51232032716621_-77.59858996973927_37.51682534664768_h0_video.jpg" width="100%"/>
+                </div>
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark__lon-95_lat29_0001_idx2752_-94.17954054975756_30.250362524797744_-94.17434525705808_30.25487285164884_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark__lon-95_lat29_0001_idx2752_-94.17954054975756_30.250362524797744_-94.17434525705808_30.25487285164884_h0_video.jpg" width="100%"/>
+                </div>
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark__lon-95_lat45_0001_idx4063_-96.89302103546285_46.82604881454225_-96.88646789596925_46.83054653228_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark__lon-95_lat45_0001_idx4063_-96.89302103546285_46.82604881454225_-96.88646789596925_46.83054653228_h0_video.jpg" width="100%"/>
+                </div>
+
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark__lon-119_lat45_0001_idx2431_-122.63073446555448_45.53766296665694_-122.6243326483455_45.54216170269283_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark__lon-119_lat45_0001_idx2431_-122.63073446555448_45.53766296665694_-122.6243326483455_45.54216170269283_h0_video.jpg" width="100%"/>
+                </div>
+
+                <div class="twoitem">
+                    <video muted autoplay="autoplay" loop="loop" width="100%">
+                        <source src="video/infitine_scene/overall_video_semantic-cond_landmark_l6_lon-79_lat29_0001_idx1608_-82.23853967974676_27.044228200610394_-82.23350007072415_27.048740662816662_h0_video.mp4" type="video/mp4">
+                    </video>
+                    <img src="./video/infitine_scene/overall_video_semantic-cond_landmark_l6_lon-79_lat29_0001_idx1608_-82.23853967974676_27.044228200610394_-82.23350007072415_27.048740662816662_h0_video.jpg" width="100%"/>
+                </div>
+
+            </div>
+            <left><b>Note: To validate the ability of infinite scene generation, we obtain large vertical semantic map with size (648 x 648) from validation patch’s source scene mesh, which has overlap with training patches (256 x 256). In each figure of this section, The image in bottom left is the input semantic condition, The image in bottom right are rendered image from generated scene voxels, The video in upper part is the rendered scene video from generated 2DGS scene.</b></left>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overall scene generation with semantic conditions</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_sem/overall_semantic-cond_g200_7_h5.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g200_7_h5_video.mp4" type="video/mp4">
+          </video>
+          <img src="video/overall_sem/overall_semantic-cond_g258_1_h10.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g258_1_h10_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_sem/overall_semantic-cond_g514_1_h5.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g514_1_h5_video.mp4" type="video/mp4">
+          </video>
+          <img src="video/overall_sem/overall_semantic-cond_g507_2_h9.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g507_2_h9_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_sem/overall_semantic-cond_g302_5_h2.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g302_5_h2_video.mp4" type="video/mp4">
+          </video>
+          <img src="video/overall_sem/overall_semantic-cond_g467_2_h7.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_sem/overall_semantic-cond_g467_2_h7_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overall scene generation with RGBD conditions</h2>
+
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_rgbd/overall_image-cond_frame_0272_pose_cond.jpg" width="666"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_rgbd/overall_image-cond_frame_0272_pose_cond_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_rgbd/overall_image-cond_frame_0317_pose_cond.jpg" width="666"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_rgbd/overall_image-cond_frame_0317_pose_cond_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_rgbd/overall_image-cond_frame_0842_pose_cond.jpg" width="666"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_rgbd/overall_image-cond_frame_0842_pose_cond_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_rgbd/overall_image-cond_frame_0895_pose_cond.jpg" width="666"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_rgbd/overall_image-cond_frame_0895_pose_cond_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/overall_rgbd/overall_image-cond_frame_1123_pose_cond.jpg" width="666"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/overall_rgbd/overall_image-cond_frame_1123_pose_cond_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Overall scene generation without conditions</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g162_1_h6_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g16_7_h7_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g204_3_h3_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g318_5_h6_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g477_4_h9_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="360">
+            <source src="video/overall_random/overall_un-cond_g94_5_h6_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Diverase generation under the same semantic condition</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/sem_conds/850.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/850_goverall_semantic-cond_0_1_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/850_goverall_semantic-cond_2_1_h9_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/850_goverall_semantic-cond_3_1_h8_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/sem_conds/18.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/18_goverall_semantic-cond_0_1_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/18_goverall_semantic-cond_1_1_h4_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/18_goverall_semantic-cond_3_1_h6_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/sem_conds/724.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/724_goverall_semantic-cond_0_3_h3_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/724_goverall_semantic-cond_1_3_h6_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/sem_conds/724_goverall_semantic-cond_3_3_h5_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Diverase Texture generation under the same semantic condition</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/texture_sem_cond/213.jpg" width="374"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/213_gtex_semantic-cond_2_4_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/213_gtex_semantic-cond_3_4_h5_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/texture_sem_cond/381.jpg" width="374"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/381_gtex_semantic-cond_0_4_h4_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/381_gtex_semantic-cond_3_4_h4_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/texture_sem_cond/441.jpg" width="374"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/441_gtex_semantic-cond_3_0_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_sem_cond/441_gtex_semantic-cond_2_0_h5_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Diverase texture generation with empty condition</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/texture_empty_cond/499.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/499_gtex_random_0_2_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/499_gtex_random_1_2_h5_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/499_gtex_random_2_2_h5_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <div class="columns is-vcentered interpolation-panel">
+          <img src="video/texture_empty_cond/618.jpg" width="187"/>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/618_gtex_random_0_1_h4_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/618_gtex_random_1_1_h4_video.mp4" type="video/mp4">
+          </video>
+          <video autoplay loop muted controls width="333">
+            <source src="video/texture_empty_cond/618_gtex_random_2_1_h4_video.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+    $(window).on('load', function () {
+        bulmaCarousel.attach('#comparison-depthpro', {
+            slidesToScroll: 2,
+            slidesToShow: 2,
+            loop: true,
+            autoplay: false,
+        });
+
+        $(".twentytwenty-container-depthpro").twentytwenty({
+            before_label: 'EarthCrafter',
+            after_label: 'Ours',
+            default_offset_pct: 0.5,
+            no_overlay: false,
+            //move_slider_on_hover: true,
+        });
+
+    });
+</script>
+
+
+<script>
+    $(window).on('load', function () {
+        bulmaCarousel.attach('#cmp-point-carousel-horizontal', {
+            slidesToScroll: 2,
+            slidesToShow: 2,
+            loop: true,
+            autoplay: false,
+        });
+
+    });
+</script>
+
+<script>
+    $(window).on('load', function () {
+        bulmaCarousel.attach('#comparison-base', {
+            slidesToScroll: 2,
+            slidesToShow: 2,
+            loop: true,
+            autoplay: false,
+        });
+
+        $(".twentytwenty-container-bottom").twentytwenty({
+            before_label: 'Base',
+            after_label: 'Ours',
+            default_offset_pct: 0.5,
+            no_overlay: false,
+            // move_slider_on_hover: true,
+        });
+
+    });
+</script>
+
+
+<footer class="footer">
+    <div class="hero-body">
+        <div class="columns is-two-fifths is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        Website template credit to <a
+                            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, and is licensed under a <a
+                            rel="license"
+                            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
